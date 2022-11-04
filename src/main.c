@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 17:37:17 by mbatstra      #+#    #+#                 */
-/*   Updated: 2022/11/04 17:38:14 by cyuzbas       ########   odam.nl         */
+/*   Updated: 2022/11/04 18:16:09 by mbatstra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		signal(SIGINT, &catch_int);
+		signal(SIGQUIT, SIG_IGN);
 		minishell(new_env);
 	}
 	return (0);
