@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:06:19 by mbatstra          #+#    #+#             */
-/*   Updated: 2022/10/14 17:09:49 by mbatstra         ###   ########.fr       */
+/*   Updated: 2022/11/05 17:45:06 by mbatstra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	add_rdr_to_cmd(t_simplecmd *cmd, t_token *tok)
 
 	node = ft_lstnew(tok);
 	if (node == NULL)
-		return (1);
+		return (12);
 	if (tok->type < RDR_OUT)
 		ft_lstadd_back(cmd->in, node);
 	else
@@ -40,7 +40,7 @@ static int	append_rdr(t_list **current, t_list **tokens, t_simplecmd *cmd)
 
 	new_tok = lexer_token_copy((*current)->next->content);
 	if (new_tok == NULL)
-		return (1);
+		return (12);
 	new_tok->type = ((t_token *)(*current)->content)->type;
 	error = add_rdr_to_cmd(cmd, new_tok);
 	skip = (*current)->next->next;

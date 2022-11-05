@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                     +:+                    */
 /*   By: mbatstra <mbatstra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 17:37:27 by mbatstra      #+#    #+#                 */
-/*   Updated: 2022/11/04 16:36:53 by cyuzbas       ########   odam.nl         */
+/*   Updated: 2022/11/05 16:20:16 by mbatstra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int			lexer_error(t_list *tokens);
 // parsing
 t_simplecmd	**parse_cmd_init(t_list *tokens);
 char		*parse_expand_env(char *old_val, t_list *envp);
+char		*parse_rm_quotes(char *str);
 void		parse_clear_cmd_table(t_simplecmd **cmd_table);
 int			parse_tokens(t_simplecmd **cmd, t_list **tokens, t_list *envp);
 int			parse_redir(t_simplecmd **cmd_table, t_list **tokens);
