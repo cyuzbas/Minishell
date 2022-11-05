@@ -64,7 +64,7 @@ void	set_outfile(t_simplecmd *cmds);
 
 //execute functions for builtin
 int		builtin_and_redirection(t_simplecmd **cmds);
-void	execute_builtin(t_simplecmd *cmds, t_list **env);
+void	execute_builtin(t_simplecmd *cmds, t_list **env, int pipe);
 int		is_builtin(t_simplecmd *cmds);
 void	choose_execute(t_simplecmd *cmds, t_list **env);
 int		ft_strcmp(const char *s1, const char *s2);

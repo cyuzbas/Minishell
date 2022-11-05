@@ -40,7 +40,7 @@ int	is_builtin(t_simplecmd *cmds)
 	return (is_builtin);
 }
 
-void	execute_builtin(t_simplecmd *cmds, t_list **env)
+void	execute_builtin(t_simplecmd *cmds, t_list **env, int pipe)
 {
 	t_list	*arg;
 	char	*command_next;
@@ -55,7 +55,7 @@ void	execute_builtin(t_simplecmd *cmds, t_list **env)
 	else if (ft_strcmp((char *)(arg->content), "pwd") == 0)
 		g_mini.exit_code = builtin_pwd();
 	else if (ft_strcmp((char *)(arg->content), "exit") == 0)
-		builtin_exit(arg, &g_mini.exit_code);
+		builtin_exit(arg, &g_mini.exit_code, pipe);
 	else if (ft_strcmp((char *)(arg->content), "echo") == 0)
 		g_mini.exit_code = builtin_echo(arg);
 	else if (ft_strcmp((char *)(arg->content), "env") == 0)

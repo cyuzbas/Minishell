@@ -45,9 +45,3 @@ void	catch_quit_parent(int sig)
 	g_mini.exit_code = 131;
 	signal(sig, &catch_parent_hrdc);
 }
-
-void	signal_parent(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, catch_quit_parent);
-}

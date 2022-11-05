@@ -28,13 +28,12 @@ bool	check_valid_argument(char *c)
 	return (true);
 }
 
-void	builtin_exit(t_list *arg, int *exit_code)
+void	builtin_exit(t_list *arg, int *exit_code, int pipe)
 {
-	if (!arg->next)
-	{
+	if (pipe == 0)
 		ft_putendl_fd("exit", STDIN_FILENO);
+	if (!arg->next)
 		exit((unsigned char)*exit_code);
-	}
 	else if (arg->next->next
 		&& check_valid_argument((char *)(arg->next->content)))
 	{
@@ -45,14 +44,12 @@ void	builtin_exit(t_list *arg, int *exit_code)
 	{
 		if (!check_valid_argument((char *)(arg->next->content)))
 		{
-			ft_putendl_fd("exit", STDIN_FILENO);
 			print_error("exit: ", (char *)(arg->next->content), \
 			": numeric argument required");
 			*exit_code = 255;
 			exit((unsigned char)255);
 		}
 		*exit_code = ft_atoi((char *)(arg->next->content));
-		ft_putendl_fd("exit", STDIN_FILENO);
 		exit((unsigned char)*exit_code);
 	}
 }

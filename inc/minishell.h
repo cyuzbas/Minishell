@@ -79,7 +79,7 @@ void		env_setval(t_list **envp, const char *name, const char *val);
 char		*env_getval(t_list *envp, const char *name, int namelen);
 
 // builtins
-void		builtin_exit(t_list *arg, int *exit_code);
+void		builtin_exit(t_list *arg, int *exit_code, int pipe);
 int			builtin_export(t_list **envp, t_list *arg);
 int			builtin_unset(t_list **envp, t_list *arg);
 int			builtin_cd(char *path, t_list **envp);
@@ -95,6 +95,5 @@ void		catch_int_child(int sig);
 void		catch_int_hrdc(int sig);
 void		catch_parent_hrdc(int sig);
 void		catch_quit_parent(int sig);
-void		signal_parent(void);
 
 #endif 

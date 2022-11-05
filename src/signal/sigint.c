@@ -35,7 +35,7 @@ void	catch_int_hrdc(int sig)
 	(void)sig;
 	g_mini.exit_code = 1;
 	g_mini.interactive = 0;
-	printf(">\n");
+	printf("\n");
 	exit(EXIT_FAILURE);
 }
 

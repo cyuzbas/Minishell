@@ -96,7 +96,7 @@ void	choose_execute(t_simplecmd *cmds, t_list **env)
 	if (arg)
 	{	
 		if (is_builtin(cmds))
-			execute_builtin(cmds, env);
+			execute_builtin(cmds, env, 1);
 		else
 			ft_execve(cmds, env);
 	}

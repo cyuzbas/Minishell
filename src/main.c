@@ -40,7 +40,7 @@ static void	change_shlvl(t_list **envp)
 static void	ft_exit(void)
 {
 	printf("exit\n");
-	exit(g_mini.exit_code);
+	exit(EXIT_SUCCESS);
 }
 
 static void	minishell(t_list *new_env)
@@ -76,21 +76,23 @@ int	main(int argc, char **argv, char **env)
 {
 	t_list	*new_env;
 
-	(void)argc;
 	(void)argv;
-	g_mini.exit_code = 0;
-	signal_suppress_output();
-	new_env = NULL;
-	env_init(env, &new_env);
-	change_shlvl(&new_env);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, &catch_int);
-	g_mini.interactive = 1;
-	while (1)
+	if (argc == 1)
 	{
-		signal(SIGINT, &catch_int);
+		g_mini.exit_code = 0;
+		signal_suppress_output();
+		new_env = NULL;
+		env_init(env, &new_env);
+		change_shlvl(&new_env);
 		signal(SIGQUIT, SIG_IGN);
-		minishell(new_env);
+		signal(SIGINT, &catch_int);
+		g_mini.interactive = 1;
+		while (1)
+		{
+			signal(SIGINT, &catch_int);
+			signal(SIGQUIT, SIG_IGN);
+			minishell(new_env);
+		}
 	}
 	return (0);
 }
