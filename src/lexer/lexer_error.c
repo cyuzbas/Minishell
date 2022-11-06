@@ -31,7 +31,7 @@ static int	lexer_error_redir(t_list *tokens)
 			{
 				ft_putstr_fd \
 				("minishell: syntax error near unexpected token `newline'\n", 2);
-				return (2);
+				return (258);
 			}
 			else if (((t_token *)tokens->next->content)->type != WORD)
 			{

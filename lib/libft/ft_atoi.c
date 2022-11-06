@@ -12,19 +12,6 @@
 
 #include "libft.h"
 
-static int	iswspace(char c)
-{
-	if (c == ' ' || \
-	c == '\t' || \
-	c == '\n' || \
-	c == '\v' || \
-	c == '\f' || \
-	c == '\r')
-		return (1);
-	else
-		return (0);
-}
-
 int	ft_atoi(const char *str)
 {
 	long	result;
@@ -32,7 +19,7 @@ int	ft_atoi(const char *str)
 
 	result = 0;
 	sign = 1;
-	while (iswspace(*str))
+	while (ft_iswspace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
 	{

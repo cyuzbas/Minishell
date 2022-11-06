@@ -43,12 +43,21 @@ static void	ft_exit(void)
 	exit(EXIT_SUCCESS);
 }
 
-static void	minishell(t_list *new_env)
+static void	parse_exec(char *input, t_list *tokens, t_list *new_env)
 {
 	t_simplecmd	**cmd_table;
-	t_list		*tokens;
-	char		*input;
-	int			lex_exit;
+
+	add_history(input);
+	cmd_table = parse_cmd_init(tokens);
+	g_mini.exit_code = parse_tokens(cmd_table, &tokens, new_env);
+	execute(cmd_table, &new_env);
+	parse_clear_cmd_table(cmd_table);
+}
+static void	minishell(t_list *new_env)
+{
+	t_list	*tokens;
+	char	*input;
+	int		lex_exit;
 
 	input = readline("minishell-$ ");
 	if (input == NULL)
@@ -56,15 +65,12 @@ static void	minishell(t_list *new_env)
 	tokens = NULL;
 	lex_exit = lexer_tokenize(&tokens, input);
 	if (lex_exit)
-		g_mini.exit_code = lex_exit;
-	else if (ft_strlen(input))
 	{
 		add_history(input);
-		cmd_table = parse_cmd_init(tokens);
-		g_mini.exit_code = parse_tokens(cmd_table, &tokens, new_env);
-		execute(cmd_table, &new_env);
-		parse_clear_cmd_table(cmd_table);
+		g_mini.exit_code = lex_exit;
 	}
+	else if (ft_strlen(input))
+		parse_exec(input, tokens, new_env);
 	ft_lstclear(&tokens, &lexer_clear_token);
 	if (g_mini.exit_code == 12)
 		ft_putendl_fd("Allocation failure", 2);
