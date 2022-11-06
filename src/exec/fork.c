@@ -86,9 +86,6 @@ void	first_command(t_simplecmd *cmds, t_list **env, int fd[2])
 
 void	single_command(t_simplecmd *cmds, t_list **env, int *lastpid)
 {
-	t_list	*arg;
-
-	arg = *(cmds->arg);
 	*lastpid = fork();
 	if (*lastpid == -1)
 		exit(-1);
@@ -103,9 +100,6 @@ void	single_command(t_simplecmd *cmds, t_list **env, int *lastpid)
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, catch_quit_parent);
-		if (arg && (ft_strcmp((char *)(arg->content), "cd") == 0
-			|| ft_strcmp((char *)(arg->content), "unset") == 0))
-			execute_builtin(cmds, env);
 	}
 }
 

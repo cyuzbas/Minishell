@@ -1,6 +1,6 @@
 NAME = minishell
-USER = cicekyuzbas
-# USER = mbatstra
+# USER = cicekyuzbas
+USER = mbatstra
 
 SRC_DIR = src/
 BUILD_DIR = build/
@@ -28,6 +28,7 @@ UNPREFIXED_SRC = main.c \
 	parse/parse_redir.c \
 	parse/parse_word.c \
 	parse/parse_expand.c \
+	parse/parse_expand_util.c \
 	exec/execute.c\
 	exec/heredoc.c\
 	exec/protect.c\
@@ -45,6 +46,7 @@ SRC = $(addprefix $(SRC_DIR), $(UNPREFIXED_SRC))
 INC = inc/
 
 FLAGS = -Wall -Wextra -Werror
+#FLAGS = -g -fsanitize=address
 
 LIB = lib/
 LIBFT = lib/libft/libft.a
@@ -70,7 +72,6 @@ $(NAME): $(OBJ) $(INC)*
 	@echo $(YELLOW)"Object files created...!"$(RESET)
 	@echo $(GREEN)"Minishell is ready!\n"$(RESET)
 	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME) -I$(INC) -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
-	# @$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME) -I$(INC) -L/usr/local/opt/readline/lib -lreadline
 
 	@echo $(GREEN)"               *------------------------------------------------------------------------------------------------------*"$(RESET)
 	@echo $(GREEN)"               | *--------------------------------------------------------------------------------------------------* |"$(RESET)
@@ -88,7 +89,6 @@ $(NAME): $(OBJ) $(INC)*
 $(BUILD_DIR)%.o: $(SRC_DIR)%.c | $(BUILD_DIR) $(BUILD_SUBDIRS)
 	@printf $(YELLOW)"%-33.33s\r"$(RESET) $@
 	@$(CC) $(FLAGS) -I/Users/$(USER)/.brew/opt/readline/include -I$(INC) -c $< -o $@
-	# @$(CC) $(FLAGS) -I/usr/local/opt/readline/include -I$(INC) -c $< -o $@
 
 clean:
 	@rm -rdf $(BUILD_DIR)

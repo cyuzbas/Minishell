@@ -54,7 +54,11 @@ void	execute2(t_simplecmd **cmds, t_list **envp)
 	last_pid = 0;
 	exec_pipe(cmds, envp, &last_pid);
 	g_mini.exit_code = wait_children(last_pid);
-	if (arg && g_mini.exit_code == 0 && in \
+	if (arg && g_mini.exit_code == 0 \
+		&& (ft_strcmp((char *)(arg->content), "cd") == 0 \
+		|| ft_strcmp((char *)(arg->content), "unset") == 0))
+		execute_builtin(*cmds, envp, 0);
+	else if (arg && g_mini.exit_code == 0 && in \
 	&& ft_strcmp((char *)(arg->content), "exit") == 0)
 		builtin_exit(arg, &g_mini.exit_code, 0);
 	else if (arg && out \
