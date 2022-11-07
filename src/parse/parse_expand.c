@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_expand.c                                     :+:      :+:    :+:   */
+/*   parse_expand.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mbatstra <mbatstra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 16:20:25 by mbatstra      #+#    #+#                 */
-/*   Updated: 2022/11/05 17:44:05 by mbatstra         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:43:15 by cyuzbas       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*parse_expand_env(char *old_val, t_list *envp)
 	while (ft_isalnum(dllr[len]) || dllr[len] == '_' || dllr[len] == '?')
 		len++;
 	if (dllr[1] == '?')
-		new_sub = (ft_itoa(g_mini.exit_code));
+		new_sub = (ft_itoa(g_exit_code));
 	else
 		new_sub = ft_strdup(env_getval(envp, dllr + 1, len - 1));
 	if (new_sub == NULL)

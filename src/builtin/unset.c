@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/20 15:11:42 by mbatstra      #+#    #+#                 */
-/*   Updated: 2022/11/03 17:09:16 by cyuzbas       ########   odam.nl         */
+/*   Updated: 2022/11/07 12:43:15 by cyuzbas       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	invalid_name(char *name)
 		(!ft_isalnum(name[i]) && name[i] != '_'))
 		{
 			print_error("unset: `", name, "': not a valid identifier");
-			g_mini.exit_code = 1;
+			g_exit_code = 1;
 			return (1);
 		}
 		i++;
@@ -75,5 +75,5 @@ int	builtin_unset(t_list **envp, t_list *arg)
 			prev->next = node->next;
 		ft_lstdelone(node, &free);
 	}
-	return (g_mini.exit_code);
+	return (g_exit_code);
 }

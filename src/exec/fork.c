@@ -6,7 +6,7 @@
 /*   By: cyuzbas <cyuzbas@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 10:26:25 by cyuzbas       #+#    #+#                 */
-/*   Updated: 2022/11/04 17:49:49 by mbatstra      ########   odam.nl         */
+/*   Updated: 2022/11/07 12:43:15 by cyuzbas       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	middle_command(t_simplecmd *cmds, t_list **env, int fd[2], int fd_end)
 		protect_close(fd[1]);
 		protect_close(fd_end);
 		choose_execute(cmds, env);
-		exit(g_mini.exit_code);
+		exit(g_exit_code);
 	}
 	if (pid > 0)
 	{
@@ -51,7 +51,7 @@ void	last_command(t_simplecmd *cmds, t_list **env, int fd[2], int *lastid)
 		protect_dup2(fd[0], STDIN_FILENO);
 		protect_close(fd[0]);
 		choose_execute(cmds, env);
-		exit(g_mini.exit_code);
+		exit(g_exit_code);
 	}
 	if (*lastid > 0)
 	{
@@ -75,7 +75,7 @@ void	first_command(t_simplecmd *cmds, t_list **env, int fd[2])
 		protect_dup2(fd[1], STDOUT_FILENO);
 		protect_close(fd[1]);
 		choose_execute(cmds, env);
-		exit(g_mini.exit_code);
+		exit(g_exit_code);
 	}
 	if (pid > 0)
 	{
@@ -94,7 +94,7 @@ void	single_command(t_simplecmd *cmds, t_list **env, int *lastpid)
 		signal(SIGINT, catch_int_child);
 		signal(SIGQUIT, catch_quit);
 		choose_execute(cmds, env);
-		exit(g_mini.exit_code);
+		exit(g_exit_code);
 	}
 	if (*lastpid > 0)
 	{

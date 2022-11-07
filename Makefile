@@ -1,6 +1,6 @@
 NAME = minishell
-# USER = cicekyuzbas
-USER = mbatstra
+USER = cyuzbas
+# USER = mbatstra
 
 SRC_DIR = src/
 BUILD_DIR = build/

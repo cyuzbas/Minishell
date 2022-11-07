@@ -6,7 +6,7 @@
 /*   By: cyuzbas <cyuzbas@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 10:26:25 by cyuzbas       #+#    #+#                 */
-/*   Updated: 2022/11/04 11:24:01 by cyuzbas       ########   odam.nl         */
+/*   Updated: 2022/11/07 12:43:15 by cyuzbas       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	heredoc(t_simplecmd **cmds, t_list **envp)
 		signal(SIGINT, catch_parent_hrdc);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	g_mini.exit_code = wait_children(pid);
+	g_exit_code = wait_children(pid);
 	set_heredoc(cmds);
 	return (TRUE);
 }

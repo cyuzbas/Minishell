@@ -6,7 +6,7 @@
 /*   By: cyuzbas <cyuzbas@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 10:26:25 by cyuzbas       #+#    #+#                 */
-/*   Updated: 2022/11/04 17:57:20 by mbatstra      ########   odam.nl         */
+/*   Updated: 2022/11/07 12:44:03 by cyuzbas       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,36 +44,29 @@ void	exec_pipe(t_simplecmd **cmds, t_list **env, int *last_pid)
 void	execute2(t_simplecmd **cmds, t_list **envp)
 {
 	int		last_pid;
-	t_list	*in;
-	t_list	*out;
 	t_list	*arg;
 
 	arg = *(*cmds)->arg;
-	in = *(*cmds)->in;
-	out = *(*cmds)->out;
 	last_pid = 0;
 	exec_pipe(cmds, envp, &last_pid);
-	g_mini.exit_code = wait_children(last_pid);
-	if (arg && g_mini.exit_code == 0 \
+	g_exit_code = wait_children(last_pid);
+	if (arg && g_exit_code == 0 \
 		&& (ft_strcmp((char *)(arg->content), "cd") == 0 \
 		|| ft_strcmp((char *)(arg->content), "unset") == 0))
 		execute_builtin(*cmds, envp, 0);
-	else if (arg && g_mini.exit_code == 0 && in \
+	else if (arg && g_exit_code == 0 \
 	&& ft_strcmp((char *)(arg->content), "exit") == 0)
-		builtin_exit(arg, &g_mini.exit_code, 0);
-	else if (arg && out \
-	&& ft_strcmp((char *)(arg->content), "exit") == 0)
-		exit(g_mini.exit_code);
+		builtin_exit(arg, &g_exit_code, 0);
 }
 
 void	execute(t_simplecmd **cmds, t_list **envp)
 {
 	if (!heredoc(cmds, envp))
 	{
-		g_mini.exit_code = -1;
+		g_exit_code = -1;
 		return ;
 	}
-	if (g_mini.interactive != 0)
+	if (g_exit_code == 0)
 	{
 		if (builtin_and_redirection(cmds) || !is_builtin(*cmds))
 			execute2(cmds, envp);

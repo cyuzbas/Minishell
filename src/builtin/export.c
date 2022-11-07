@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/20 14:37:33 by mbatstra      #+#    #+#                 */
-/*   Updated: 2022/11/04 12:56:27 by mbatstra      ########   odam.nl         */
+/*   Updated: 2022/11/07 12:43:15 by cyuzbas       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	invalid_name(char *name)
 			(!ft_isalnum(name[i]) && name[i] != '_'))
 		{
 			print_error("export: `", name, "': not a valid identifier");
-			g_mini.exit_code = 1;
+			g_exit_code = 1;
 			return (1);
 		}
 		i++;
@@ -113,8 +113,8 @@ int	builtin_export(t_list **envp, t_list *arg)
 		nameval = (char *)(arg->next->content);
 		arg = arg->next;
 		if (invalid_name(nameval))
-			g_mini.exit_code = 1;
+			g_exit_code = 1;
 		check_export(nameval, envp);
 	}
-	return (g_mini.exit_code);
+	return (g_exit_code);
 }

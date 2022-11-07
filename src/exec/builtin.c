@@ -6,7 +6,7 @@
 /*   By: cyuzbas <cyuzbas@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 10:26:25 by cyuzbas       #+#    #+#                 */
-/*   Updated: 2022/11/03 17:09:16 by cyuzbas       ########   odam.nl         */
+/*   Updated: 2022/11/07 12:43:15 by cyuzbas       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,19 @@ void	execute_builtin(t_simplecmd *cmds, t_list **env, int pipe)
 	else
 		command_next = (char *)(arg->next->content);
 	if (ft_strcmp((char *)(arg->content), "cd") == 0)
-		g_mini.exit_code = builtin_cd(command_next, env);
+		g_exit_code = builtin_cd(command_next, env);
 	else if (ft_strcmp((char *)(arg->content), "pwd") == 0)
-		g_mini.exit_code = builtin_pwd();
+		g_exit_code = builtin_pwd();
 	else if (ft_strcmp((char *)(arg->content), "exit") == 0)
-		builtin_exit(arg, &g_mini.exit_code, pipe);
+		builtin_exit(arg, &g_exit_code, pipe);
 	else if (ft_strcmp((char *)(arg->content), "echo") == 0)
-		g_mini.exit_code = builtin_echo(arg);
+		g_exit_code = builtin_echo(arg);
 	else if (ft_strcmp((char *)(arg->content), "env") == 0)
-		g_mini.exit_code = builtin_env(*env);
+		g_exit_code = builtin_env(*env);
 	else if (ft_strcmp((char *)(arg->content), "export") == 0)
-		g_mini.exit_code = builtin_export(env, arg);
+		g_exit_code = builtin_export(env, arg);
 	else if (ft_strcmp((char *)(arg->content), "unset") == 0)
-		g_mini.exit_code = builtin_unset(env, arg);
+		g_exit_code = builtin_unset(env, arg);
 }
 
 int	builtin_and_redirection(t_simplecmd **cmds)

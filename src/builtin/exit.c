@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/16 14:20:54 by mbatstra      #+#    #+#                 */
-/*   Updated: 2022/11/04 18:18:55 by mbatstra      ########   odam.nl         */
+/*   Updated: 2022/11/07 12:43:15 by cyuzbas       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	builtin_exit(t_list *arg, int *exit_code, int pipe)
 		&& check_valid_argument((char *)(arg->next->content)))
 	{
 		print_error("exit: ", NULL, "too many arguments");
-		g_mini.exit_code = 1;
+		g_exit_code = 1;
 	}
 	else
 	{

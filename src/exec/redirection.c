@@ -6,7 +6,7 @@
 /*   By: cyuzbas <cyuzbas@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 10:26:25 by cyuzbas       #+#    #+#                 */
-/*   Updated: 2022/11/04 16:46:47 by cyuzbas       ########   odam.nl         */
+/*   Updated: 2022/11/07 12:43:15 by cyuzbas       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	set_infile(t_simplecmd *cmds)
 			if (id < 0)
 			{
 				print_error(rdr_in->value, NULL, NULL);
-				g_mini.exit_code = 1;
+				g_exit_code = 1;
 				exit(1);
 			}
 			protect_dup2(id, STDIN_FILENO);
@@ -59,7 +59,7 @@ void	set_outfile(t_simplecmd *cmds)
 			if (fd < 0)
 			{
 				print_error(rdr_out->value, NULL, NULL);
-				g_mini.exit_code = 1;
+				g_exit_code = 1;
 				exit(1);
 			}
 			protect_dup2(fd, STDOUT_FILENO);

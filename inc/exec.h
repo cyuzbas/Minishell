@@ -6,7 +6,7 @@
 /*   By: cyuzbas <cyuzbas@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 10:26:21 by cyuzbas       #+#    #+#                 */
-/*   Updated: 2022/11/04 16:19:50 by cyuzbas       ########   odam.nl         */
+/*   Updated: 2022/11/07 12:40:40 by cyuzbas       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef struct s_mini
-{
-	int	exit_code;
-	int	interactive;
-}			t_mini;
+// typedef struct s_mini
+// {
+// 	int	exit_code;
+// 	int	interactive;
+// }			t_mini;
 
-t_mini	g_mini;
+// t_mini	g_mini;
+
+int	g_exit_code;
 
 typedef struct s_fd
 {
