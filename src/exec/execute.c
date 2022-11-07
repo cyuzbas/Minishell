@@ -6,7 +6,7 @@
 /*   By: cyuzbas <cyuzbas@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 10:26:25 by cyuzbas       #+#    #+#                 */
-/*   Updated: 2022/11/07 12:44:03 by cyuzbas       ########   odam.nl         */
+/*   Updated: 2022/11/07 19:30:40 by mbatstra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ void	exec_pipe(t_simplecmd **cmds, t_list **env, int *last_pid)
 void	execute2(t_simplecmd **cmds, t_list **envp)
 {
 	int		last_pid;
+	t_list	*in;
+	t_list	*out;
 	t_list	*arg;
 
+	in = *(*cmds)->in;
+	out = *(*cmds)->out;
 	arg = *(*cmds)->arg;
 	last_pid = 0;
 	exec_pipe(cmds, envp, &last_pid);
@@ -54,9 +58,12 @@ void	execute2(t_simplecmd **cmds, t_list **envp)
 		&& (ft_strcmp((char *)(arg->content), "cd") == 0 \
 		|| ft_strcmp((char *)(arg->content), "unset") == 0))
 		execute_builtin(*cmds, envp, 0);
-	else if (arg && g_exit_code == 0 \
+	else if (arg && g_exit_code == 0 && in \
 	&& ft_strcmp((char *)(arg->content), "exit") == 0)
 		builtin_exit(arg, &g_exit_code, 0);
+	else if (arg && out \
+	&& ft_strcmp((char *)(arg->content), "exit") == 0)
+		exit(g_exit_code);
 }
 
 void	execute(t_simplecmd **cmds, t_list **envp)
