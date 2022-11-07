@@ -6,7 +6,7 @@
 /*   By: mbatstra <mbatstra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 17:37:17 by mbatstra      #+#    #+#                 */
-/*   Updated: 2022/11/07 12:43:15 by cyuzbas       ########   odam.nl         */
+/*   Updated: 2022/11/07 13:05:52 by mbatstra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static void	ft_exit(void)
 	exit(EXIT_SUCCESS);
 }
 
-static void	parse_exec(char *input, t_list *tokens, t_list *new_env)
+static void	parse_exec(char *input, t_list **tokens, t_list *new_env)
 {
 	t_simplecmd	**cmd_table;
 
 	add_history(input);
-	cmd_table = parse_cmd_init(tokens);
-	g_exit_code = parse_tokens(cmd_table, &tokens, new_env);
+	cmd_table = parse_cmd_init(*tokens);
+	g_exit_code = parse_tokens(cmd_table, tokens, new_env);
 	execute(cmd_table, &new_env);
 	parse_clear_cmd_table(cmd_table);
 }
@@ -71,7 +71,7 @@ static void	minishell(t_list *new_env)
 		g_exit_code = lex_exit;
 	}
 	else if (ft_strlen(input))
-		parse_exec(input, tokens, new_env);
+		parse_exec(input, &tokens, new_env);
 	ft_lstclear(&tokens, &lexer_clear_token);
 	if (g_exit_code == 12)
 		ft_putendl_fd("Allocation failure", 2);
