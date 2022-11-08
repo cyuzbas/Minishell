@@ -49,7 +49,7 @@ static void	parse_exec(char *input, t_list **tokens, t_list *new_env)
 
 	add_history(input);
 	cmd_table = parse_cmd_init(*tokens);
-	g_exit_code = parse_tokens(cmd_table, tokens, new_env);
+	g_exit_code = parse_tokens(cmd_table, &tokens, new_env);
 	execute(cmd_table, &new_env);
 	parse_clear_cmd_table(cmd_table);
 }
